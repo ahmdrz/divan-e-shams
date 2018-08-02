@@ -1,0 +1,27 @@
+{{define "index"}}
+<page gravity="center">
+    <theme background="#efebe9" text="#3e2723" primary="#a1887f" />
+    <image src="https://molana.zibaei.net/resources/image.png?ver=7" />
+    <edittext style="primary" field="word" prefill="application" placeholder="قطعه غزلی بنویسید ..." />
+    <button style="primary" action="index/search/">جست‌وجو کن</button>
+    <divider style="empty" />
+    <image src="https://molana.zibaei.net/resources/separator.png?ver=5" />
+    <divider style="empty" />
+    <card action="/random/" style="small">
+        <image style="avatar" src="https://molana.zibaei.net/resources/circle.png?ver=9" />
+        <text>به صورت تصادفی بخوان</text>
+        <text>
+            <small>با کلیک بر روی این بخش ، به صورت تصادفی یک غزل از مولانا را بخوانید</small>
+        </text>
+    </card>
+
+    <footer>
+        <primaryAction action="/setting" clearFields="true">
+            منتخب شده ها
+        </primaryAction>
+        <secondaryAction action="web: https://www.vajehyab.com/about">
+            پربازدید هفته
+        </secondaryAction>
+    </footer>
+</page>
+{{end}}

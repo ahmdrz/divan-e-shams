@@ -1,0 +1,22 @@
+{{define "show"}}
+<page gravity="top">
+    <theme background="#efebe9" text="#3e2723" primary="#a1887f" />
+    <image src="https://molana.zibaei.net/resources/header.png?ver=6" />
+    <text>
+        <small>غزل شماره {{.number | to_persian_number}} : </small>
+        <br/>
+        <br/> {{.content | as_html }}
+    </text>
+    <divider style="empty" />
+    <image src="https://molana.zibaei.net/resources/separator.png?ver=5" />
+    <divider style="empty" />
+    <dualbuttons>
+        <button action="ghazal/{{add .number 1}}/">بعدی</button>
+        <button action="ghazal/{{add .number -1}}/">قبلی</button>
+    </dualbuttons>
+    <divider style="empty" />
+    <footer action="someUrl/" validate="false" clearFields="true">
+        بازگشت به صفحه اول
+    </footer>
+</page>
+{{end}}
