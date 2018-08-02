@@ -9,13 +9,16 @@
     </text>
     <divider style="empty" />
     <image src="https://molana.zibaei.net/resources/separator.png?ver=5" />
-    <divider style="empty" />
+    <divider style="empty" /> {{if gt .number 2}}
     <dualbuttons>
         <button action="ghazal/{{add .number 1}}/">بعدی</button>
         <button action="ghazal/{{add .number -1}}/">قبلی</button>
     </dualbuttons>
+    {{else}}
+    <button action="ghazal/{{add .number 1}}/">بعدی</button>
+    {{end}}
     <divider style="empty" />
-    <footer action="someUrl/" validate="false" clearFields="true">
+    <footer action="/" validate="false" clearFields="true">
         بازگشت به صفحه اول
     </footer>
 </page>

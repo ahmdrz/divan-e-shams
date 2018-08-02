@@ -31,9 +31,11 @@ func Run() error {
 	router.SetHTMLTemplate(template.New("./templates"))
 
 	router.Static("/resources", "./resources")
-	router.GET("/", indexHandler)
-	router.GET("/random/", randomHandler)
-	router.GET("/ghazal/:number/", showHandler)
+	router.POST("/", indexHandler)
+	router.POST("/random/", randomHandler)
+	router.POST("/ghazal/:number/", showHandler)
+	router.POST("/favorites", underConstructionHandler)
+	router.POST("/mostviewed", underConstructionHandler)
 
 	return router.Run("127.0.0.1:8081")
 }
@@ -66,4 +68,8 @@ func showPoem(ctx *gin.Context, number int) {
 		"number":  number,
 		"content": poem.Content,
 	})
+}
+
+func underConstructionHandler(ctx *gin.Context) {
+	ctx.HTML(http.StatusOK, "under-construction", nil)
 }
