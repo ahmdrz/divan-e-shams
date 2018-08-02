@@ -35,7 +35,7 @@ func Run() error {
 	router.POST("/", indexHandler)
 	router.POST("/random/", randomHandler)
 	router.POST("/ghazal/:number/", showHandler)
-	router.POST("/search", searchHandler)
+	router.POST("/search/", searchHandler)
 
 	router.POST("/favorites", underConstructionHandler)
 	router.POST("/mostviewed", underConstructionHandler)

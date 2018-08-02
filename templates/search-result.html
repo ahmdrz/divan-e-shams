@@ -6,7 +6,7 @@
     <card action="/ghazal/{{.ID}}/" style="small">
         <image style="avatar" src="https://molana.zibaei.net/resources/circle.png?ver=9" />
         <text>
-            <small>{{.Content | get_first}}</small>
+            <small>{{(.Content | get_first) | as_html}}</small>
         </text>
     </card>
     <image src="https://molana.zibaei.net/resources/separator.png?ver=5" />    
