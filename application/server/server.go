@@ -2,6 +2,7 @@ package server
 
 import (
 	"encoding/json"
+	"log"
 	"math/rand"
 	"net/http"
 	"strconv"
@@ -55,6 +56,7 @@ func searchHandler(ctx *gin.Context) {
 
 	poems, err := database.FindPoem(Payload.Word)
 	if err != nil {
+		log.Println("Error on searching", Payload.Word, err)
 		ctx.HTML(http.StatusOK, "under-construction", gin.H{"message": "خطایی رخ داده است"})
 		return
 	}
@@ -78,6 +80,7 @@ func showHandler(ctx *gin.Context) {
 func showPoem(ctx *gin.Context, number int) {
 	poem, err := database.GetPoem("ID", number)
 	if err != nil {
+		log.Println("Error on fetching", number, err)
 		ctx.HTML(http.StatusOK, "under-construction", gin.H{"message": "خطایی رخ داده است"})
 		return
 	}
