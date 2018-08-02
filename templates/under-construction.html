@@ -1,7 +1,10 @@
 {{define "under-construction"}}
 <page gravity="center">
     <theme background="#efebe9" text="#3e2723" primary="#a1887f" />
-    <image src="https://molana.zibaei.net/resources/under-construction.png?rev=1"/>
+    <image width="70%" src="https://molana.zibaei.net/resources/under-construction.png?rev=1"/>
+    {{if .message}}
+    <text style="centered">{{.message}}</text>
+    {{end}}
     <footer action="/" validate="false" clearFields="true">
         بازگشت به صفحه اول
     </footer>

@@ -1,7 +1,7 @@
 package server
 
 import (
-	"log"
+	"encoding/json"
 	"math/rand"
 	"net/http"
 	"strconv"
@@ -34,6 +34,8 @@ func Run() error {
 	router.POST("/", indexHandler)
 	router.POST("/random/", randomHandler)
 	router.POST("/ghazal/:number/", showHandler)
+	router.POST("/search", searchHandler)
+
 	router.POST("/favorites", underConstructionHandler)
 	router.POST("/mostviewed", underConstructionHandler)
 
@@ -44,6 +46,21 @@ func indexHandler(ctx *gin.Context) {
 	ctx.HTML(http.StatusOK, "index", nil)
 }
 
+func searchHandler(ctx *gin.Context) {
+	payload := ctx.PostForm("payload")
+	var Payload struct {
+		Word string `json:"word"`
+	}
+	json.Unmarshal([]byte(payload), &Payload)
+
+	poems, err := database.FindPoem(Payload.Word)
+	if err != nil {
+		ctx.HTML(http.StatusOK, "under-construction", gin.H{"message": "خطایی رخ داده است"})
+		return
+	}
+	ctx.HTML(http.StatusOK, "search-result", gin.H{"poems": poems})
+}
+
 func randomHandler(ctx *gin.Context) {
 	randomNumber := 1 + rand.Intn(TOTAL_POEMS)
 	showPoem(ctx, randomNumber)
@@ -52,7 +69,7 @@ func randomHandler(ctx *gin.Context) {
 func showHandler(ctx *gin.Context) {
 	number, err := strconv.Atoi(ctx.Param("number"))
 	if err != nil {
-		log.Println("Input error", err)
+		ctx.HTML(http.StatusOK, "under-construction", gin.H{"message": "خطایی رخ داده است"})
 		return
 	}
 	showPoem(ctx, number)
@@ -61,7 +78,7 @@ func showHandler(ctx *gin.Context) {
 func showPoem(ctx *gin.Context, number int) {
 	poem, err := database.GetPoem("ID", number)
 	if err != nil {
-		log.Println("Database error", err)
+		ctx.HTML(http.StatusOK, "under-construction", gin.H{"message": "خطایی رخ داده است"})
 		return
 	}
 	ctx.HTML(http.StatusOK, "show", gin.H{

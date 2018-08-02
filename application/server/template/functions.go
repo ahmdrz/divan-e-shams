@@ -34,3 +34,8 @@ func ToPersianNumber(number int) string {
 	}
 	return a
 }
+
+func GetFirst(a string) string {
+	parts := strings.Split(a, "<br/><br/>")
+	return parts[0]
+}

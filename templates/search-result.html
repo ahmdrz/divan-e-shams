@@ -1,0 +1,19 @@
+{{define "search-result"}}
+<page gravity="top">
+    <theme background="#efebe9" text="#3e2723" primary="#a1887f" />
+    <image src="https://molana.zibaei.net/resources/header.png?ver=6" />
+    {{range .poems}}
+    <card action="/ghazal/{{.ID}}/" style="small">
+        <image style="avatar" src="https://molana.zibaei.net/resources/circle.png?ver=9" />
+        <text>
+            <small>{{.Content | get_first}}</small>
+        </text>
+    </card>
+    <image src="https://molana.zibaei.net/resources/separator.png?ver=5" />    
+    {{end}}
+    <divider style="empty" />
+    <footer action="/" validate="false" clearFields="true">
+        بازگشت به صفحه اول
+    </footer>
+</page>
+{{end}}

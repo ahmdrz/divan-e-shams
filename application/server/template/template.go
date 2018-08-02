@@ -12,6 +12,7 @@ var (
 		"add":               AddFunction,
 		"as_html":           AsHTML,
 		"to_persian_number": ToPersianNumber,
+		"get_first":         GetFirst,
 	}
 )
 
