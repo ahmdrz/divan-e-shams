@@ -46,4 +46,5 @@ func GetType(a int) string {
 	} else if a == 2 {
 		return "robaei"
 	}
+	return ""
 }
