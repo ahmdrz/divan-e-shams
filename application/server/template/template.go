@@ -13,6 +13,7 @@ var (
 		"as_html":           AsHTML,
 		"to_persian_number": ToPersianNumber,
 		"get_first":         GetFirst,
+		"get_type":          GetType,
 	}
 )
 

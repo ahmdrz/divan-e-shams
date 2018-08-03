@@ -15,7 +15,8 @@ import (
 )
 
 const (
-	TOTAL_POEMS = 2300
+	TOTAL_POEMS   = 2300
+	TOTAL_ROBAEIS = 1992
 )
 
 func init() {
@@ -33,7 +34,7 @@ func Run() error {
 
 	router.Static("/resources", "./resources")
 	router.POST("/", indexHandler)
-	router.POST("/random/", randomHandler)
+	router.POST("/random/:type/", randomHandler)
 	router.POST("/ghazal/:number/", showHandler)
 	router.POST("/search/", searchHandler)
 
@@ -64,8 +65,15 @@ func searchHandler(ctx *gin.Context) {
 }
 
 func randomHandler(ctx *gin.Context) {
-	randomNumber := 1 + rand.Intn(TOTAL_POEMS)
-	showPoem(ctx, randomNumber)
+	mode := ctx.Param("type")
+	switch mode {
+	case "ghazal":
+		showPoem(ctx, 1+rand.Intn(TOTAL_POEMS))
+		break
+	case "robaei":
+		showRobaei(ctx, 1+rand.Intn(TOTAL_ROBAEIS))
+		break
+	}
 }
 
 func showHandler(ctx *gin.Context) {
@@ -80,13 +88,28 @@ func showHandler(ctx *gin.Context) {
 func showPoem(ctx *gin.Context, number int) {
 	poem, err := database.GetPoem("ID", number)
 	if err != nil {
-		log.Println("Error on fetching", number, err)
+		log.Println("Error on fetching [ghazal]", number, err)
 		ctx.HTML(http.StatusOK, "under-construction", gin.H{"message": "خطایی رخ داده است"})
 		return
 	}
 	ctx.HTML(http.StatusOK, "show", gin.H{
 		"number":  number,
 		"content": poem.Content,
+		"type":    1,
+	})
+}
+
+func showRobaei(ctx *gin.Context, number int) {
+	robaei, err := database.GetRobaei("ID", number)
+	if err != nil {
+		log.Println("Error on fetching [robaei]", number, err)
+		ctx.HTML(http.StatusOK, "under-construction", gin.H{"message": "خطایی رخ داده است"})
+		return
+	}
+	ctx.HTML(http.StatusOK, "show", gin.H{
+		"number":  number,
+		"content": robaei.Content,
+		"type":    2,
 	})
 }
 

@@ -39,3 +39,11 @@ func GetFirst(a string) string {
 	parts := strings.Split(a, "<br/><br/>")
 	return parts[0]
 }
+
+func GetType(a int) string {
+	if a == 1 {
+		return "ghazal"
+	} else if a == 2 {
+		return "robaei"
+	}
+}
