@@ -3,7 +3,7 @@
     <theme background="#efebe9" text="#3e2723" primary="#a1887f" />
     <image src="https://molana.zibaei.net/resources/header.png?ver=6" />
     {{range .poems}}
-    <card action="/ghazal/{{.ID}}/" style="small">
+    <card action="/show/ghazal/{{.ID}}/" style="small">
         <image style="avatar" src="https://molana.zibaei.net/resources/circle.png?ver=9" />
         <text>
             <small>{{(.Content | get_first) | as_html}}</small>

@@ -35,7 +35,7 @@ func Run() error {
 	router.Static("/resources", "./resources")
 	router.POST("/", indexHandler)
 	router.POST("/random/:type/", randomHandler)
-	router.POST("/:type/:number/", showHandler)
+	router.POST("/show/:table/:number/", showHandler)
 	router.POST("/search/", searchHandler)
 
 	router.POST("/favorites", underConstructionHandler)
@@ -77,7 +77,7 @@ func randomHandler(ctx *gin.Context) {
 }
 
 func showHandler(ctx *gin.Context) {
-	mode := ctx.Param("type")
+	mode := ctx.Param("table")
 	number, err := strconv.Atoi(ctx.Param("number"))
 	if err != nil {
 		ctx.HTML(http.StatusOK, "under-construction", gin.H{"message": "خطایی رخ داده است"})
